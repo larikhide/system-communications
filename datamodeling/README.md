@@ -8,8 +8,8 @@
 ## Conceptual scheme
 ![ER](../assets/images/entity_relations.svg)
 
-## Общая модель формальных и функциональных связей
-TBD
+## Communication diagram
+![CD](../assets/images/communication_diagram.drawio.svg)
 
 ## Места, где нужно поменять связи  
 TBD
