@@ -9,7 +9,7 @@
 ![ER](../assets/images/conceptual_scheme.svg)
 
 ## Communication diagram
-![CD](../assets/images/communication_diagram.drawio.svg)
+![CD](../assets/images/communication_model.svg)
 
 ## Места, где нужно поменять связи  
 
