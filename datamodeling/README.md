@@ -6,7 +6,7 @@
 5. Напишите название всех топиков и события, которые будут в топиках.
 
 ## Conceptual scheme
-![ER](../assets/images/entity_relations.svg)
+![ER](../assets/images/conceptual_scheme.svg)
 
 ## Communication diagram
 ![CD](../assets/images/communication_diagram.drawio.svg)
