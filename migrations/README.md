@@ -3,7 +3,95 @@
 # Задания для домашки:
 
 ## Опишите схему события в формате json schema для любого формального и функционального события. На выходе у вас должно получиться две схемы. Если не хотите использовать json schema, можно взять avro.
-tbd
+
+### Формальное событие. Стриминг заданий для кандидата
+
+```
+JSON Schema
+
+{
+    "$schema": "https://json-schema.org/schema/task",
+     "$id": "https://example.com/task.schema.json/v0",
+    "title": "TaskCreated.v0",
+    "description": "Initial json schema for task created formal event",
+
+    "definitions": {
+        "payload": {
+            "type": "object",
+            "properties": {
+                "replication_id": {"type": "string"},
+                "title": {"type": "string"},
+                "author_replication_id": {"type": "string"},
+                "task_text": {"type": "string"},
+                "created_at": {"type": "string"},
+
+                "steps": {
+                    "type": "array",
+
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "replication_id": {"type": "string"},
+                            "author_replication_id": {"type": "string"},
+                            "text": {"type": "string"},
+                            "created_at": {"type": "string"},
+                        },
+                        "required": ["replication_id", "author_replication_id", "text", "created_at"],
+                    }
+                }
+            },
+            "required": ["replication_id", "title", "author_replication_id", "task_text", "created_at"]
+        }
+    },
+    "type": "object",
+
+    "properties": {
+       "event_id": {"type": "string"},
+        "event_version": {"enum": [0]},
+        "event_name": {"enum": ["TaskCreated"]},
+        "produced_at": {"type": "string"},
+
+        "data": { "$ref": "#/definitions/event_data"}
+    },
+    
+    "required": ["payload", "event_id", "event_version", "event_name", "produced_at"]
+}
+```
+
+### Функциональное событие. Задание зарегистрировано.
+
+```json
+{
+    "$schema": "https://json-schema.org/schema/task",
+     "$id": "https://example.com/task.schema.json/v0",
+    "title": "TaskRegistered.v0",
+    "description": "Initial json schema for task registered fucntional event",
+
+    "definitions": {
+        "payload": {
+            "type": "object",
+            "properties": {
+                "domain_id": {"type": "string"},
+                "author_replication_id": {"type": "string"},
+                "created_at": {"type": "string"},
+            },
+            "required": ["domain_id", "author_replication_id", "created_at"]
+        }
+    },
+    "type": "object",
+
+    "properties": {
+       "event_id": {"type": "string"},
+        "event_version": {"enum": [0]},
+        "event_name": {"enum": ["TaskRegistered"]},
+        "produced_at": {"type": "string"},
+
+        "data": { "$ref": "#/definitions/event_data"}
+    },
+    
+    "required": ["payload", "event_id", "event_version", "event_name", "produced_at"]
+}
+```
 
 ## Опишите процесс миграции четырёх связей. Если у вас нет связи с нужным условием, можно пропустить описание миграции:
 ### Переход формальной синхронной на асинхронную event-driven.
